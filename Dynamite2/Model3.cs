@@ -1,4 +1,4 @@
-﻿﻿﻿﻿﻿using System;
+﻿﻿﻿﻿﻿﻿﻿using System;
  using System.Collections.Generic;
 using System.Linq;
 using BotInterface.Game;
@@ -20,14 +20,14 @@ namespace DynamiteTest
             {
                 int maxSubStringLen = new List<int> {xnyn.Count() - i, generalMaxSubStringLen}.Min();
 
-                for (int j = 2; j < maxSubStringLen; j++)
+                for (int j = 1; j < maxSubStringLen; j++)
                 {
                     string xListPreceding = xn.Substring(i, j);
                     char yOutput = yn[i + j];
                     
                     charFrequency = FormattingClass.FormatDictionaryModel3(charFrequency, j, xListPreceding, yOutput);
                     
-                    charFrequency[j][xListPreceding][yOutput].Add(xnyn.Count());
+                    charFrequency[j][xListPreceding][yOutput].Add(i);
                 }
             }
         }
@@ -53,13 +53,12 @@ namespace DynamiteTest
             double relevance = 0;
             foreach (var charDiscoveryTurn in charDiscoveryTurns)
             {
-                relevance += Math.Pow(currentTurn - charDiscoveryTurn, -0.25);
+                relevance += Math.Pow(currentTurn - charDiscoveryTurn, -0.1);
             }
 
             return relevance;
         }
-
-        /*
+        
         public void PrintPredictionDictionary()
         {
             Console.WriteLine("Prediction Dictionary");
@@ -68,6 +67,26 @@ namespace DynamiteTest
                 Console.WriteLine(move.Key+":   "+move.Value);
             }
         }
-        */
+        
+        public void PrintCharFrequency()
+        {
+            Console.WriteLine("Char Freq Dictionary");
+            foreach (var stringLenDict in charFrequency)
+            {
+                Console.WriteLine($"String length: {stringLenDict.Key}");
+                foreach (var stringDict in stringLenDict.Value)
+                {
+                    Console.WriteLine($"   String: {stringDict.Key}");
+                    foreach (var charDiscoveryTurns in stringDict.Value)
+                    {
+                        Console.WriteLine($"      Followed by Char: {charDiscoveryTurns.Key}");
+                        foreach (var charDiscoveryTurn in charDiscoveryTurns.Value)
+                        {
+                            Console.WriteLine($"         Discovery turn: {charDiscoveryTurn}");
+                        }
+                    }
+                }
+            }
+        }
     }
 }
