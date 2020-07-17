@@ -1,5 +1,7 @@
-﻿﻿﻿using System.Collections.Generic;
-using BotInterface.Game;
+﻿﻿﻿﻿﻿using System;
+   using System.Collections.Generic;
+   using System.Linq;
+   using BotInterface.Game;
 
 namespace DynamiteTest
 {
@@ -11,7 +13,7 @@ namespace DynamiteTest
             {
                 stringFrequency.Add(j, new Dictionary<string, Dictionary<char, int>>());
             }
-
+            
             if (!stringFrequency[j].ContainsKey(xListPreceding))
             {
                 stringFrequency[j].Add(xListPreceding, new Dictionary<char, int>());

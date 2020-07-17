@@ -1,4 +1,4 @@
-﻿﻿﻿using System;
+﻿﻿﻿﻿﻿using System;
  using System.Collections.Generic;
 using System.Linq;
 using BotInterface.Game;
@@ -13,6 +13,7 @@ namespace DynamiteTest
 
         public void TrainDictionary(Round[] xnyn, string xn, string yn, int generalMaxSubStringLen)
         {
+            charFrequency = new Dictionary<int, Dictionary<string, Dictionary<char, int>>>();
             for (int i = 0; i < xnyn.Count(); i++)
             {
                 int maxSubStringLen = new List<int> {xnyn.Count() - i, generalMaxSubStringLen}.Min();
@@ -23,7 +24,7 @@ namespace DynamiteTest
                     char yOutput = yn[i + j];
                     
                     charFrequency = FormattingClass.FormatDictionary(charFrequency, j, xListPreceding, yOutput);
-                    
+
                     charFrequency[j][xListPreceding][yOutput] += 1;
                 }
             }
