@@ -17,23 +17,23 @@ using BotInterface.Game;
         
         private static Move F(Round[] xnyn)
         {
-            const int generalMaxSubStringLen = 10;
-            var strategy = 1;
-            
+            const int generalMaxSubStringLen = 6;
+            const int generalEnemyMaxSubStringLen = 4;
             var xn = FormattingClass.FormatXNYN(xnyn)[0];
             var yn = FormattingClass.FormatXNYN(xnyn)[1];
-
-            var modelEnemy = new Model1();
-            modelEnemy.TrainDictionary(xnyn, xn, yn, generalMaxSubStringLen);
-            modelEnemy.PredictDictionary(xn, generalMaxSubStringLen);
-            bool isMyDynamiteFinished = xnyn.Count(xiyi => xiyi.GetP1() == Move.D) == 100;
             
+            var strategy = 1;
             switch (strategy)
             {
                 case 1:
                 {
                     // RESPOND ACCORDING TO THEIR RESPONSE
+                    var modelEnemy = new Model2();
+                    modelEnemy.TrainDictionary(xnyn, xn, yn, generalMaxSubStringLen);
+                    modelEnemy.PredictDictionary(xn, generalMaxSubStringLen);
+                    
                     var response = new Response();
+                    bool isMyDynamiteFinished = xnyn.Count(xiyi => xiyi.GetP1() == Move.D) == 100;
                     response.GetBestMoveFromPredictionDictionary(modelEnemy.predictionDictionary, isMyDynamiteFinished);
                     response.GetMoveFromString();
                 
@@ -43,14 +43,15 @@ using BotInterface.Game;
                 {
                     // RESPOND ACCORDING TO HOW I WOULD RESPOND TO MYSELF
                     var modelMe = new Model1();
-                    modelMe.TrainDictionary(xnyn, yn, xn, generalMaxSubStringLen);
-                    modelMe.PredictDictionary(yn, generalMaxSubStringLen);
-                    bool isEnemyDynamiteFinished = xnyn.Count(xiyi => xiyi.GetP2() == Move.D) == 100;
-                
+                    modelMe.TrainDictionary(xnyn, yn, xn, generalEnemyMaxSubStringLen);
+                    modelMe.PredictDictionary(yn, generalEnemyMaxSubStringLen);
+                    
                     var enemyResponse = new Response();
+                    bool isEnemyDynamiteFinished = xnyn.Count(xiyi => xiyi.GetP2() == Move.D) == 100;
                     enemyResponse.GetBestMoveFromPredictionDictionary(modelMe.predictionDictionary, isEnemyDynamiteFinished);
-                
+                    
                     var myResponse = new Response();
+                    bool isMyDynamiteFinished = xnyn.Count(xiyi => xiyi.GetP1() == Move.D) == 100;
                     myResponse.GetBestMoveFromPrediction(enemyResponse.moveString, isMyDynamiteFinished);
                     myResponse.GetMoveFromString();
                 
