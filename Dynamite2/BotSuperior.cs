@@ -17,7 +17,7 @@ using BotInterface.Game;
         
         private static Move F(Round[] xnyn)
         {
-            const int generalMaxSubStringLen = 6;
+            const int generalMaxSubStringLen = 4;
             const int generalEnemyMaxSubStringLen = 4;
             var xn = FormattingClass.FormatXNYN(xnyn)[0];
             var yn = FormattingClass.FormatXNYN(xnyn)[1];
@@ -28,7 +28,7 @@ using BotInterface.Game;
                 case 1:
                 {
                     // RESPOND ACCORDING TO THEIR RESPONSE
-                    var modelEnemy = new Model2();
+                    var modelEnemy = new Model3();
                     modelEnemy.TrainDictionary(xnyn, xn, yn, generalMaxSubStringLen);
                     modelEnemy.PredictDictionary(xn, generalMaxSubStringLen);
                     
