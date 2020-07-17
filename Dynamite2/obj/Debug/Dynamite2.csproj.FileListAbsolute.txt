@@ -1,0 +1,8 @@
+C:\Work\Training\Dynamite2\Dynamite2\bin\Debug\Dynamite2.dll
+C:\Work\Training\Dynamite2\Dynamite2\bin\Debug\Dynamite2.pdb
+C:\Work\Training\Dynamite2\Dynamite2\bin\Debug\BotInterface.dll
+C:\Work\Training\Dynamite2\Dynamite2\obj\Debug\Dynamite2.csprojAssemblyReference.cache
+C:\Work\Training\Dynamite2\Dynamite2\obj\Debug\Dynamite2.csproj.CoreCompileInputs.cache
+C:\Work\Training\Dynamite2\Dynamite2\obj\Debug\Dynamite2.csproj.CopyComplete
+C:\Work\Training\Dynamite2\Dynamite2\obj\Debug\Dynamite2.dll
+C:\Work\Training\Dynamite2\Dynamite2\obj\Debug\Dynamite2.pdb
